@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "linkedin-mcp",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "observability": { "enabled": true },
+  "containers": [
+    {
+      "class_name": "LinkedInMcp",
+      "image": "./container/Dockerfile",
+      "instance_type": "standard",  // Chromium needs the RAM
+      "max_instances": 1
+    }
+  ],
+  "durable_objects": {
+    "bindings": [{ "class_name": "LinkedInMcp", "name": "LINKEDIN_MCP" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["LinkedInMcp"] }]
+}
